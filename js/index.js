@@ -10,7 +10,6 @@ let computerPlay = () => {
   return rprBank[Math.floor(Math.random() * rprBank.length)];
 };
 
-//console.log(computerPlay());
 
 // Write a function that plas a single round of RPS
 // Takes two parameters
@@ -23,9 +22,7 @@ let computerPlay = () => {
 
 // output win status and the two inputs in the return
 
-let gameRound = (player, computer) => {
-	let play = player.toLowerCase();
-	let comp = computer.toLowerCase();
+let gameRound = (play, comp) => {
   let r = rprBank[0]; // Rock
   let p = rprBank[1]; // Paper
   let s = rprBank[2]; // Scissors
@@ -43,10 +40,54 @@ let gameRound = (player, computer) => {
 	//sconsole.log(tieStatus);
 
   return winStatus
-    ? `You Win! ${play} beats ${comp}.`
+    ? 0
 		: tieStatus && !winStatus
-		? `You tied! ${play} is a stalemate against ${comp}.` 
-    : `You Lose! ${comp} beats ${play}.`;
+		? 1 
+    : 2
 };
 
-console.log(gameRound("sCissors", computerPlay()));
+//console.log(gameRound("sCissors", computerPlay()));
+
+// Write a function called game
+// The game should loop for 5 rounds
+// The user is prompted every round
+// The score should be kept across each round
+// Each round the results are logged to the console.
+// At the end you're either a winner or loser
+
+
+// create the game function
+// declare you needed variables
+// create round structure
+// prompt user every round
+// after the round console log result and track score
+// compare scores and then console log the final game message.
+
+let game = (rounds) => {
+	const playerChoice = prompt(`Hi player, Rock, Paper or Scissors?`).toLowerCase();
+	const computerChoice = computerPlay();
+	let playerScore = 0;
+	let computerScore= 0;
+
+	const round = gameRound(playerChoice, computerChoice);
+	switch (round) {
+		case 0:
+			console.log(`You Win! ${playerChoice} beats ${computerChoice}.`);
+			playerScore++;
+			break;
+		case 1:
+			console.log(`You tied! ${playerChoice} is a stalemate against ${computerChoice}.`);
+			break;
+		case 2:
+			console.log(`You Lose! ${computerChoice} beats ${playerChoice}.`);
+			computerScore++;
+			break;
+		default:
+			break;
+	}
+
+	
+	//console.log(round);
+}
+
+game(5);
