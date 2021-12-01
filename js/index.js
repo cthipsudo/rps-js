@@ -23,7 +23,9 @@ let computerPlay = () => {
 
 // output win status and the two inputs in the return
 
-let gameRound = (play, comp) => {
+let gameRound = (player, computer) => {
+	let play = player.toLowerCase();
+	let comp = computer.toLowerCase();
   let r = rprBank[0]; // Rock
   let p = rprBank[1]; // Paper
   let s = rprBank[2]; // Scissors
@@ -36,10 +38,15 @@ let gameRound = (play, comp) => {
       : play === p && comp === r
       ? true
       : false;
+	let tieStatus = play === comp ? true : false;
+
+	//sconsole.log(tieStatus);
 
   return winStatus
-    ? `You Win! ${play} beats ${comp}`
-    : `You Lose! ${comp} beats ${play}`;
+    ? `You Win! ${play} beats ${comp}.`
+		: tieStatus && !winStatus
+		? `You tied! ${play} is a stalemate against ${comp}.` 
+    : `You Lose! ${comp} beats ${play}.`;
 };
 
-console.log(gameRound("scissors", "paper"));
+console.log(gameRound("sCissors", computerPlay()));
