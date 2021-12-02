@@ -3,7 +3,6 @@
 // Welcome to Rock, Paper, Scissors.
 
 // Create a function that will randomly return Rock, Paper or Scissors
-
 let computerPlay = () => {
   return rprBank[Math.floor(Math.random() * rprBank.length)]; // returns a random choice
 };
@@ -34,14 +33,28 @@ let gameRound = (play, comp) => {
       : false;
   let tieStatus = play === comp ? true : false;
 
-
-  return winStatus ? 0 : tieStatus && !winStatus ? 1 : 2;
-	//returns 0 if player wins the round
-	// 1 if tied
-	// 2 if lost
+  const roundResult = winStatus ? 0 : tieStatus && !winStatus ? 1 : 2;
+  return calcRound(roundResult, play, comp);
 };
 
-//console.log(gameRound("sCissors", computerPlay()));
+let calcRound = (round, playerChoice, computerChoice) => {
+  // Decide round results
+  switch (round) {
+    case 0:
+      return`You Win! ${playerChoice} beats ${computerChoice}.`;
+      //playerScore++;
+      break;
+    case 1:
+      return `You tied! ${playerChoice} is a stalemate against ${computerChoice}.`;
+      break;
+    case 2:
+      return`You Lose! ${computerChoice} beats ${playerChoice}.`;
+      //computerScore++;
+      break;
+    default:
+      break;
+  }
+}
 
 // Write a function called game
 // The game should loop for 5 rounds
@@ -49,13 +62,6 @@ let gameRound = (play, comp) => {
 // The score should be kept across each round
 // Each round the results are logged to the console.
 // At the end you're either a winner or loser
-
-// create the game function
-// declare you needed variables
-// create round structure
-// prompt user every round
-// after the round console log result and track score
-// compare scores and then console log the final game message.
 
 let game = (rounds) => {
 	
@@ -77,25 +83,7 @@ let game = (rounds) => {
   ).toLowerCase();
   const computerChoice = computerPlay();
 
-	// Decide round results
-  const round = gameRound(playerChoice, computerChoice);
-  switch (round) {
-    case 0:
-      console.log(`You Win! ${playerChoice} beats ${computerChoice}.`);
-      playerScore++;
-      break;
-    case 1:
-      console.log(
-        `You tied! ${playerChoice} is a stalemate against ${computerChoice}.`
-      );
-      break;
-    case 2:
-      console.log(`You Lose! ${computerChoice} beats ${playerChoice}.`);
-      computerScore++;
-      break;
-    default:
-      break;
-  }
+	
 	//Log the score
 	console.log(`Player:${playerScore} | Computer: ${computerScore}`);
 
@@ -107,4 +95,16 @@ let game = (rounds) => {
 const rprBank = ["rock", "paper", "scissors"];
 let playerScore = 0;
 let computerScore = 0;
-game(5);
+
+const choices = document.querySelectorAll('.choice-box button');
+const resultsBox = document.querySelector('.result');
+
+choices.forEach(choice => {
+  choice.addEventListener('click', (e)=>{
+    const pChoice = choice.getAttribute('data-choice');
+    const results = gameRound(pChoice, computerPlay());
+    //const resultsDisplay = document.createElement('p');
+    resultsBox.textContent = results;
+  });
+});
+
