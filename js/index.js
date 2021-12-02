@@ -10,7 +10,6 @@ let computerPlay = () => {
   return rprBank[Math.floor(Math.random() * rprBank.length)];
 };
 
-
 // Write a function that plas a single round of RPS
 // Takes two parameters
 // returns a string declaring the winner of the round.
@@ -35,15 +34,11 @@ let gameRound = (play, comp) => {
       : play === p && comp === r
       ? true
       : false;
-	let tieStatus = play === comp ? true : false;
+  let tieStatus = play === comp ? true : false;
 
-	//sconsole.log(tieStatus);
+  //sconsole.log(tieStatus);
 
-  return winStatus
-    ? 0
-		: tieStatus && !winStatus
-		? 1 
-    : 2
+  return winStatus ? 0 : tieStatus && !winStatus ? 1 : 2;
 };
 
 //console.log(gameRound("sCissors", computerPlay()));
@@ -55,7 +50,6 @@ let gameRound = (play, comp) => {
 // Each round the results are logged to the console.
 // At the end you're either a winner or loser
 
-
 // create the game function
 // declare you needed variables
 // create round structure
@@ -64,30 +58,44 @@ let gameRound = (play, comp) => {
 // compare scores and then console log the final game message.
 
 let game = (rounds) => {
-	const playerChoice = prompt(`Hi player, Rock, Paper or Scissors?`).toLowerCase();
-	const computerChoice = computerPlay();
-	let playerScore = 0;
-	let computerScore= 0;
+  if (rounds === 0) {
+    console.log(
+      playerScore > computerScore
+        ? `We've got a Winner!`
+        : playerScore === computerScore
+        ? "Tie! Play again?"
+        : `Loser! Try again next time...`
+    );
+    return;
+  }
 
-	const round = gameRound(playerChoice, computerChoice);
-	switch (round) {
-		case 0:
-			console.log(`You Win! ${playerChoice} beats ${computerChoice}.`);
-			playerScore++;
-			break;
-		case 1:
-			console.log(`You tied! ${playerChoice} is a stalemate against ${computerChoice}.`);
-			break;
-		case 2:
-			console.log(`You Lose! ${computerChoice} beats ${playerChoice}.`);
-			computerScore++;
-			break;
-		default:
-			break;
-	}
+  const playerChoice = prompt(
+    `Hi player, Rock, Paper or Scissors?`
+  ).toLowerCase();
+  const computerChoice = computerPlay();
 
-	
-	//console.log(round);
-}
+  const round = gameRound(playerChoice, computerChoice);
+  switch (round) {
+    case 0:
+      console.log(`You Win! ${playerChoice} beats ${computerChoice}.`);
+      playerScore++;
+      break;
+    case 1:
+      console.log(
+        `You tied! ${playerChoice} is a stalemate against ${computerChoice}.`
+      );
+      break;
+    case 2:
+      console.log(`You Lose! ${computerChoice} beats ${playerChoice}.`);
+      computerScore++;
+      break;
+    default:
+      break;
+  }
+	console.log(`Score Player:${playerScore} | Computer: ${computerScore}`);
+  game(rounds - 1);
+};
 
+let playerScore = 0;
+let computerScore = 0;
 game(5);
