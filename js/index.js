@@ -58,6 +58,7 @@ let gameRound = (play, comp) => {
 // compare scores and then console log the final game message.
 
 let game = (rounds) => {
+	
 	//Base case and results calculation
   if (rounds === 0) {
     console.log(
@@ -97,7 +98,7 @@ let game = (rounds) => {
   }
 	//Log the score
 	console.log(`Player:${playerScore} | Computer: ${computerScore}`);
-	
+
 	//Repeat the function
   game(rounds - 1);
 };
