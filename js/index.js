@@ -41,15 +41,15 @@ let calcRound = (round, playerChoice, computerChoice) => {
   // Decide round results
   switch (round) {
     case 0:
+      playerScore++;
       return`You Win! ${playerChoice} beats ${computerChoice}.`;
-      //playerScore++;
       break;
     case 1:
       return `You tied! ${playerChoice} is a stalemate against ${computerChoice}.`;
       break;
     case 2:
+      computerScore++;
       return`You Lose! ${computerChoice} beats ${playerChoice}.`;
-      //computerScore++;
       break;
     default:
       break;
@@ -98,6 +98,8 @@ let computerScore = 0;
 
 const choices = document.querySelectorAll('.choice-box button');
 const resultsBox = document.querySelector('.result');
+const pScoreElement = document.querySelector('.scorebox .p-score');
+const cScoreElement = document.querySelector('.scorebox .c-score');
 
 choices.forEach(choice => {
   choice.addEventListener('click', (e)=>{
@@ -105,6 +107,9 @@ choices.forEach(choice => {
     const results = gameRound(pChoice, computerPlay());
     //const resultsDisplay = document.createElement('p');
     resultsBox.textContent = results;
+    pScoreElement.textContent = playerScore;
+    cScoreElement.textContent = computerScore;
+    //checkWinner();
   });
 });
 
