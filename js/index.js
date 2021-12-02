@@ -1,13 +1,11 @@
-console.log("Hello World");
+//console.log("Hello World");
 
 // Welcome to Rock, Paper, Scissors.
 
 // Create a function that will randomly return Rock, Paper or Scissors
 
-const rprBank = ["rock", "paper", "scissors"];
-
 let computerPlay = () => {
-  return rprBank[Math.floor(Math.random() * rprBank.length)];
+  return rprBank[Math.floor(Math.random() * rprBank.length)]; // returns a random choice
 };
 
 // Write a function that plas a single round of RPS
@@ -36,9 +34,11 @@ let gameRound = (play, comp) => {
       : false;
   let tieStatus = play === comp ? true : false;
 
-  //sconsole.log(tieStatus);
 
   return winStatus ? 0 : tieStatus && !winStatus ? 1 : 2;
+	//returns 0 if player wins the round
+	// 1 if tied
+	// 2 if lost
 };
 
 //console.log(gameRound("sCissors", computerPlay()));
@@ -58,6 +58,7 @@ let gameRound = (play, comp) => {
 // compare scores and then console log the final game message.
 
 let game = (rounds) => {
+	//Base case and results calculation
   if (rounds === 0) {
     console.log(
       playerScore > computerScore
@@ -69,11 +70,13 @@ let game = (rounds) => {
     return;
   }
 
+	// Computer and Player choices
   const playerChoice = prompt(
     `Hi player, Rock, Paper or Scissors?`
   ).toLowerCase();
   const computerChoice = computerPlay();
 
+	// Decide round results
   const round = gameRound(playerChoice, computerChoice);
   switch (round) {
     case 0:
@@ -92,10 +95,15 @@ let game = (rounds) => {
     default:
       break;
   }
-	console.log(`Score Player:${playerScore} | Computer: ${computerScore}`);
+	//Log the score
+	console.log(`Player:${playerScore} | Computer: ${computerScore}`);
+	
+	//Repeat the function
   game(rounds - 1);
 };
 
+
+const rprBank = ["rock", "paper", "scissors"];
 let playerScore = 0;
 let computerScore = 0;
 game(5);
