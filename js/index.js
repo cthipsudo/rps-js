@@ -7,17 +7,6 @@ let computerPlay = () => {
   return rprBank[Math.floor(Math.random() * rprBank.length)]; // returns a random choice
 };
 
-// Write a function that plas a single round of RPS
-// Takes two parameters
-// returns a string declaring the winner of the round.
-
-// Compare the inputs against each other
-// How is a winner declared?
-// Declare your variables
-// Write some conditional statment using Rock Beats Scissors, Scissors Beats Paper, Paper Beats Rock, and anything else you lose.
-
-// output win status and the two inputs in the return
-
 let gameRound = (play, comp) => {
   let r = rprBank[0]; // Rock
   let p = rprBank[1]; // Paper
@@ -56,40 +45,16 @@ let calcRound = (round, playerChoice, computerChoice) => {
   }
 }
 
-// Write a function called game
-// The game should loop for 5 rounds
-// The user is prompted every round
-// The score should be kept across each round
-// Each round the results are logged to the console.
-// At the end you're either a winner or loser
-
-let game = (rounds) => {
-	
-	//Base case and results calculation
-  if (rounds === 0) {
-    console.log(
-      playerScore > computerScore
-        ? `We've got a Winner!`
-        : playerScore === computerScore
-        ? "Tie! Play again?"
-        : `Loser! Try again next time...`
-    );
-    return;
+let checkWinner = () => {
+  //if player reaches 5, player is winner
+  //if computer reaches 5, comp is winner 
+  if(playerScore === 5){
+    resultsBox.textContent = "Player Wins!"
   }
-
-	// Computer and Player choices
-  const playerChoice = prompt(
-    `Hi player, Rock, Paper or Scissors?`
-  ).toLowerCase();
-  const computerChoice = computerPlay();
-
-	
-	//Log the score
-	console.log(`Player:${playerScore} | Computer: ${computerScore}`);
-
-	//Repeat the function
-  game(rounds - 1);
-};
+  if(computerScore === 5){
+    resultsBox.textContent = "Computer Wins!"
+  }
+}
 
 
 const rprBank = ["rock", "paper", "scissors"];
@@ -102,14 +67,14 @@ const pScoreElement = document.querySelector('.scorebox .p-score');
 const cScoreElement = document.querySelector('.scorebox .c-score');
 
 choices.forEach(choice => {
-  choice.addEventListener('click', (e)=>{
+  choice.addEventListener('click', ()=>{
     const pChoice = choice.getAttribute('data-choice');
     const results = gameRound(pChoice, computerPlay());
     //const resultsDisplay = document.createElement('p');
     resultsBox.textContent = results;
     pScoreElement.textContent = playerScore;
     cScoreElement.textContent = computerScore;
-    //checkWinner();
+    checkWinner();
   });
 });
 
