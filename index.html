@@ -1,12 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RPS</title>
-</head>
-<body>
+  </head>
+  <body>
+    <div class="choice-box">
+      <button data-choice="rock" class="rock-button">Rock</button>
+      <button data-choice="paper" class="paper-button">Paper</button>
+      <button data-choice="scissors" class="scissors-button">Scissors</button>
+    </div>
+    <div class="result">
+    </div>
+    <div class="scorebox">
+        <div>
+            Player Score:
+            <span class="p-score">0</span>
+        </div>
+        <div>
+            Computer Score:
+            <span class="c-score">0</span>
+        </div>
+    </div>
     <script src="./js/index.js"></script>
-</body>
+  </body>
 </html>
