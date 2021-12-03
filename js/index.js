@@ -46,13 +46,15 @@ let calcRound = (round, playerChoice, computerChoice) => {
 };
 
 let playRound = (choice) => {
-  const pChoice = choice.getAttribute("data-choice");
+  if(!gameOver){
+    const pChoice = choice.getAttribute("data-choice");
   const results = gameRound(pChoice, computerPlay());
   //const resultsDisplay = document.createElement('p');
   resultsBox.textContent = results;
   pScoreElement.textContent = playerScore;
   cScoreElement.textContent = computerScore;
   checkWinner();
+  }
 };
 
 let checkWinner = () => {
@@ -60,15 +62,18 @@ let checkWinner = () => {
   //if computer reaches 5, comp is winner
   if (playerScore === 5) {
     resultsBox.textContent = "Player Wins!";
+    gameOver = true;
   }
   if (computerScore === 5) {
     resultsBox.textContent = "Computer Wins!";
+    gameOver = true;
   }
 };
 
 const rprBank = ["rock", "paper", "scissors"];
 let playerScore = 0;
 let computerScore = 0;
+let gameOver = false;
 
 const choices = document.querySelectorAll(".choice-box button");
 const resultsBox = document.querySelector(".result");
